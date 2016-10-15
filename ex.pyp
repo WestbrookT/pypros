@@ -18,6 +18,9 @@ body a
         img
             display: auto;
 
+        &:hover
+            color: #49f;
+
 div
     div
         color: white;

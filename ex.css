@@ -1,18 +1,5 @@
-body {
-	background: #111;
-	color: #e11;
-}
-
 body a div {
 	height: 30px;
-}
-
-body a div span {
-	height: 1px;
-}
-
-body a div a h1 {
-	color: black;
 }
 
 body a {
@@ -24,16 +11,33 @@ div div {
 	color: white;
 }
 
-body a div a {
-	width: 10px;
-}
-
 div {
 	height: 100px;
 	width: 10px;
 }
 
+body a div:hover {
+	color: #49f;
+}
+
+body a div a h1 {
+	color: black;
+}
+
+body {
+	background: #111;
+	color: #e11;
+}
+
+body a div a {
+	width: 10px;
+}
+
 body a div img {
 	display: auto;
+}
+
+body a div span {
+	height: 1px;
 }
 
