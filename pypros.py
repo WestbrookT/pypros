@@ -82,7 +82,9 @@ def write(filename, data):
 	f.close()
 
 def process(filename):
-	write(filename+'.css', build(filename+'.pyp'))
+	css_file = filename+'.css' if not filename.endswith('.pyp') else filename[:filename.index('.pyp')]+'.css'
+	pyp_file = filename+'.pyp' if not filename.endswith('.pyp') else filename
+	write(css_file, build(pyp_file))
 
 if __name__ == '__main__':
 
@@ -97,19 +99,21 @@ if __name__ == '__main__':
 					watch = True
 		else:
 			if watch:
-				f = open(arg+'.pyp', 'rb')
-				watched[arg] = hashlib.md5(f.read())
+				key = arg if arg.endswith('.pyp') else arg + '.pyp'
+				f = open(key, 'rb')
+				watched[key] = hashlib.md5(f.read())
 				f.close()
 			process(arg)
 
 	while watch:
 
 		for filename in watched:
-			f = open(filename+'.pyp', 'rb')
+			name = filename if filename.endswith('.pyp') else filename + '.pyp'
+			f = open(name, 'rb')
 			data = f.read()
 			f.close()
-			if watched[filename] != hashlib.md5(data):
-				process(filename)
+			if watched[name] != hashlib.md5(data):
+				process(name)
 		time.sleep(1)
 
 

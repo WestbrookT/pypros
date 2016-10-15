@@ -19,5 +19,6 @@ div
 
 
 body
-    background: #444;
+    background: #111;
+
 

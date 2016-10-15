@@ -59,7 +59,8 @@ Semicolons are mandatory, tabbing is used to denote hierarchy, and selectors are
 
 `python pypros.py file1 file2 fileN`
 
-Note: the filename for ex.pyp would just be ex, the script will add the file endings
+Note: the filename for ex.pyp would just be ex, the script will add the file endings, or it can be ex.pyp and the output
+file will be ex.css
 
 Flags:
     -w, sets the program to run until interrupted and watches the files passed to it

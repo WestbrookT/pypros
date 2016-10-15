@@ -1,29 +1,29 @@
-body a div a {
-	width: 10px;
-}
-
 body a div span {
 	height: 1px;
-}
-
-body {
-	background: #444;
-}
-
-div {
-	color: blue;
 }
 
 body a div {
 	height: 30px;
 }
 
-body a div a h1 {
-	color: black;
+body {
+	background: #111;
 }
 
 body a {
 	height: 100px;
 	width: 100px;
+}
+
+div {
+	color: blue;
+}
+
+body a div a {
+	width: 10px;
+}
+
+body a div a h1 {
+	color: black;
 }
 
