@@ -1,0 +1,25 @@
+div {
+	color: blue;
+}
+
+body a {
+	height: 100px;
+	width: 100px;
+}
+
+body a div a h1 {
+	color: black;
+}
+
+body a div span {
+	height: 1px;
+}
+
+body a div a {
+	width: 10px;
+}
+
+body a div {
+	height: 30px;
+}
+
