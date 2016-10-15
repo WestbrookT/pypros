@@ -17,3 +17,7 @@ body a
 div
     color: blue;
 
+
+body
+    background: #444;
+

@@ -1,5 +1,5 @@
 from collections import deque
-import sys
+import sys, hashlib, time
 
 
 def stack_string(stack):
@@ -85,9 +85,32 @@ def process(filename):
 	write(filename+'.css', build(filename+'.pyp'))
 
 if __name__ == '__main__':
-	for filename in sys.argv[1:]:
-		process(filename)
 
+	watched = {}
+	watch = False
+
+	for arg in sys.argv[1:]:
+		if arg.startswith('-'):
+			flags = arg[1:].split()
+			for flag in flags:
+				if flag == 'w':
+					watch = True
+		else:
+			if watch:
+				f = open(arg+'.pyp', 'rb')
+				watched[arg] = hashlib.md5(f.read())
+				f.close()
+			process(arg)
+
+	while watch:
+
+		for filename in watched:
+			f = open(filename+'.pyp', 'rb')
+			data = f.read()
+			f.close()
+			if watched[filename] != hashlib.md5(data):
+				process(filename)
+		time.sleep(1)
 
 
 
