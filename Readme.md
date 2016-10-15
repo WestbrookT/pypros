@@ -60,3 +60,6 @@ Semicolons are mandatory, tabbing is used to denote hierarchy, and selectors are
 `python pypros.py file1 file2 fileN`
 
 Note: the filename for ex.pyp would just be ex, the script will add the file endings
+
+Flags:
+    -w, sets the program to run until interrupted and watches the files passed to it
