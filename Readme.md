@@ -58,3 +58,5 @@ body a div {
 Semicolons are mandatory, tabbing is used to denote hierarchy, and selectors are just lines without semicolons in them.
 
 `python pypros.py file1 file2 fileN`
+
+Note: the filename for ex.pyp would just be ex, the script will add the file endings
