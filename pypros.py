@@ -106,8 +106,10 @@ def write(filename, data):
 	f = open(filename, 'w')
 	out = ''
 	for selector in data:
-		out += selector + '{\n'
+		sel = selector.replace(' &', '')
+		out += sel + '{\n'
 		for i in data[selector]:
+
 			out += '\t' + i.lstrip().rstrip() + '\n'
 		out += '}\n\n'
 
