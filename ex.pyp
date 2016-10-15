@@ -14,8 +14,16 @@ body a
         span
             height: 1px;
 
+
+        img
+            display: auto;
+
 div
-    color: blue;
+    div
+        color: white;
+    height: 100px;
+    width: 10px;
+
 
 
 body

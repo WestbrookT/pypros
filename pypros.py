@@ -23,7 +23,7 @@ def build(filename):
 
 	f = open(filename, 'r')
 
-	indent_level = ['']
+	indent_level = []
 	selector_stack = deque()
 	output = {}
 	depth_inc = False
@@ -43,14 +43,27 @@ def build(filename):
 
 				indent = line[:line.find(line.lstrip())]
 				if depth_inc and len(indent_string(indent_level)) < len(indent):
-					added_indent = indent[len(indent_string(indent_level)):]
+					if line.find(';') == -1:
+						selector_stack.append(line.rstrip().lstrip())
+						output[stack_string(selector_stack)] = []
 
-					indent_level.append(added_indent)
-					output[stack_string(selector_stack)].append(line)
-					depth_inc = False
+						added_indent = indent[len(indent_string(indent_level)):]
+
+						indent_level.append(added_indent)
+
+						depth_inc = True
+					else:
+						added_indent = indent[len(indent_string(indent_level)):]
+
+						indent_level.append(added_indent)
+						output[stack_string(selector_stack)].append(line)
+						depth_inc = False
 				elif depth_inc:
+
 					selector_stack.pop()
 					depth_inc = False
+
+
 				else:
 
 					while indent_string(indent_level) != indent:
