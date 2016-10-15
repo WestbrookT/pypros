@@ -23,7 +23,7 @@ def build(filename):
 
 	f = open(filename, 'r')
 
-	indent_level = []
+	indent_level = ['']
 	selector_stack = deque()
 	output = {}
 	depth_inc = False
@@ -31,10 +31,12 @@ def build(filename):
 	for line in f:
 		if not line.isspace():
 
-			if check_indent(indent_level, line):
+			if check_indent(indent_level, line) and not depth_inc:
 				if line.find(';') == -1:
 					selector_stack.append(line.rstrip().lstrip())
-					output[stack_string(selector_stack)] = []
+					selector = stack_string(selector_stack)
+					if selector not in output:
+						output[stack_string(selector_stack)] = []
 
 					depth_inc = True
 				else:
@@ -42,10 +44,25 @@ def build(filename):
 			else:
 
 				indent = line[:line.find(line.lstrip())]
-				if depth_inc and len(indent_string(indent_level)) < len(indent):
+				if depth_inc and len(indent_string(indent_level)) >= len(indent):
+
+					selector_stack.pop()
+
 					if line.find(';') == -1:
 						selector_stack.append(line.rstrip().lstrip())
-						output[stack_string(selector_stack)] = []
+						selector = stack_string(selector_stack)
+						if selector not in output:
+							output[stack_string(selector_stack)] = []
+						depth_inc = True
+					else:
+						depth_inc = False
+				elif depth_inc and len(indent_string(indent_level)) < len(indent):
+
+					if line.find(';') == -1:
+						selector_stack.append(line.rstrip().lstrip())
+						selector = stack_string(selector_stack)
+						if selector not in output:
+							output[stack_string(selector_stack)] = []
 
 						added_indent = indent[len(indent_string(indent_level)):]
 
@@ -60,6 +77,7 @@ def build(filename):
 						depth_inc = False
 				elif depth_inc:
 
+
 					selector_stack.pop()
 					depth_inc = False
 
@@ -72,7 +90,9 @@ def build(filename):
 						indent_level.pop()
 					if line.find(';') == -1:
 						selector_stack.append(line.rstrip().lstrip())
-						output[stack_string(selector_stack)] = []
+						selector = stack_string(selector_stack)
+						if selector not in output:
+							output[stack_string(selector_stack)] = []
 
 						depth_inc = True
 					else:
@@ -95,6 +115,7 @@ def write(filename, data):
 	f.close()
 
 def process(filename):
+	print('Processing', filename+'...')
 	css_file = filename+'.css' if not filename.endswith('.pyp') else filename[:filename.index('.pyp')]+'.css'
 	pyp_file = filename+'.pyp' if not filename.endswith('.pyp') else filename
 	write(css_file, build(pyp_file))
@@ -136,7 +157,7 @@ if __name__ == '__main__':
 
 				process(name)
 				watched[name] = digest
-				print('Updated for', name+ '...')
+
 		time.sleep(1)
 
 
