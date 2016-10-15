@@ -1,5 +1,6 @@
-body a div {
-	height: 30px;
+body {
+	background: #111;
+	color: #e11;
 }
 
 body a {
@@ -7,30 +8,20 @@ body a {
 	width: 100px;
 }
 
-div div {
-	color: white;
-}
-
-div {
-	height: 100px;
-	width: 10px;
+body a div {
+	height: 30px;
 }
 
 body a div:hover {
 	color: #49f;
 }
 
-body a div a h1 {
-	color: black;
-}
-
-body {
-	background: #111;
-	color: #e11;
-}
-
 body a div a {
 	width: 10px;
+}
+
+body a div a h1 {
+	color: black;
 }
 
 body a div img {
@@ -39,5 +30,14 @@ body a div img {
 
 body a div span {
 	height: 1px;
+}
+
+div {
+	height: 100px;
+	width: 10px;
+}
+
+div div {
+	color: white;
 }
 

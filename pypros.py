@@ -105,7 +105,9 @@ def write(filename, data):
 
 	f = open(filename, 'w')
 	out = ''
-	for selector in data:
+	keys = list(data.keys())
+	keys.sort()
+	for selector in keys:
 		sel = selector.replace(' &', '')
 		out += sel + '{\n'
 		for i in data[selector]:
