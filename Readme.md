@@ -56,3 +56,5 @@ body a div {
 ##Usage
 
 Semicolons are mandatory, tabbing is used to denote hierarchy, and selectors are just lines without semicolons in them.
+
+`python pypros.py file1 file2 fileN`
