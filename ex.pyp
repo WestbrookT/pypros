@@ -20,5 +20,6 @@ div
 
 body
     background: #111;
+    color: #e11;
 
 

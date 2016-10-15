@@ -101,7 +101,11 @@ if __name__ == '__main__':
 			if watch:
 				key = arg if arg.endswith('.pyp') else arg + '.pyp'
 				f = open(key, 'rb')
-				watched[key] = hashlib.md5(f.read())
+				hash_obj = hashlib.md5()
+				hash_obj.update(f.read())
+				digest = hash_obj.hexdigest()
+				watched[key] = digest
+
 				f.close()
 			process(arg)
 
@@ -112,8 +116,14 @@ if __name__ == '__main__':
 			f = open(name, 'rb')
 			data = f.read()
 			f.close()
-			if watched[name] != hashlib.md5(data):
+			hash_obj = hashlib.md5()
+			hash_obj.update(data)
+			digest = hash_obj.hexdigest()
+			if watched[name] != digest:
+
 				process(name)
+				watched[name] = digest
+				print('Updated for', name+ '...')
 		time.sleep(1)
 
 

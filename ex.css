@@ -1,13 +1,18 @@
-body a div span {
-	height: 1px;
-}
-
 body a div {
 	height: 30px;
 }
 
+body a div span {
+	height: 1px;
+}
+
+body a div a {
+	width: 10px;
+}
+
 body {
 	background: #111;
+	color: #e11;
 }
 
 body a {
@@ -17,10 +22,6 @@ body a {
 
 div {
 	color: blue;
-}
-
-body a div a {
-	width: 10px;
 }
 
 body a div a h1 {
