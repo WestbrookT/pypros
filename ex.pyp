@@ -4,7 +4,6 @@ body a
     height: 100px;
     width: 100px;
 
-
     div
         height: 30px;
         a
@@ -13,7 +12,6 @@ body a
                 color: black;
         span
             height: 1px;
-
 
         img
             display: auto;
@@ -26,8 +24,6 @@ div
         color: white;
     height: 100px;
     width: 10px;
-
-
 
 body
     background: #111;

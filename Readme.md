@@ -6,6 +6,7 @@ Of course assuming python is already installed.
 
 ###This:
 ```
+
 div
 body a
     height: 100px;
@@ -19,7 +20,6 @@ body a
                 color: black;
         span
             height: 1px;
-
 
         img
             display: auto;
@@ -39,8 +39,9 @@ body
 ```
 ###Produces:
 ```
-body a div {
-	height: 30px;
+div {
+	height: 100px;
+	width: 10px;
 }
 
 body a {
@@ -48,38 +49,37 @@ body a {
 	width: 100px;
 }
 
-div div {
-	color: white;
-}
-
-div {
-	height: 100px;
-	width: 10px;
-}
-
-body a div:hover {
-	color: #49f;
-}
-
-body a div a h1 {
-	color: black;
-}
-
-body {
-	background: #111;
-	color: #e11;
+body a div {
+	height: 30px;
 }
 
 body a div a {
 	width: 10px;
 }
 
-body a div img {
-	display: auto;
+body a div a h1 {
+	color: black;
 }
 
 body a div span {
 	height: 1px;
+}
+
+body a div img {
+	display: auto;
+}
+
+body a div:hover {
+	color: #49f;
+}
+
+div div {
+	color: white;
+}
+
+body {
+	background: #111;
+	color: #e11;
 }
 ```
 
