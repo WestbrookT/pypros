@@ -1,5 +1,5 @@
 from collections import deque
-import sys, hashlib, time
+import sys, hashlib, time, operator
 
 
 def stack_string(stack):
@@ -27,6 +27,7 @@ def build(filename):
 	selector_stack = deque()
 	output = {}
 	depth_inc = False
+	encounter = 0
 
 	for line in f:
 		if not line.isspace():
@@ -36,11 +37,12 @@ def build(filename):
 					selector_stack.append(line.rstrip().lstrip())
 					selector = stack_string(selector_stack)
 					if selector not in output:
-						output[stack_string(selector_stack)] = []
+						output[stack_string(selector_stack)] = [encounter, []]
+						encounter += 1
 
 					depth_inc = True
 				else:
-					output[stack_string(selector_stack)].append(line)
+					output[stack_string(selector_stack)][1].append(line)
 			else:
 
 				indent = line[:line.find(line.lstrip())]
@@ -52,7 +54,8 @@ def build(filename):
 						selector_stack.append(line.rstrip().lstrip())
 						selector = stack_string(selector_stack)
 						if selector not in output:
-							output[stack_string(selector_stack)] = []
+							output[stack_string(selector_stack)] = [encounter, []]
+							encounter += 1
 						depth_inc = True
 					else:
 						depth_inc = False
@@ -62,7 +65,8 @@ def build(filename):
 						selector_stack.append(line.rstrip().lstrip())
 						selector = stack_string(selector_stack)
 						if selector not in output:
-							output[stack_string(selector_stack)] = []
+							output[stack_string(selector_stack)] = [encounter, []]
+							encounter += 1
 
 						added_indent = indent[len(indent_string(indent_level)):]
 
@@ -73,7 +77,7 @@ def build(filename):
 						added_indent = indent[len(indent_string(indent_level)):]
 
 						indent_level.append(added_indent)
-						output[stack_string(selector_stack)].append(line)
+						output[stack_string(selector_stack)][1].append(line)
 						depth_inc = False
 				elif depth_inc:
 
@@ -92,11 +96,12 @@ def build(filename):
 						selector_stack.append(line.rstrip().lstrip())
 						selector = stack_string(selector_stack)
 						if selector not in output:
-							output[stack_string(selector_stack)] = []
+							output[stack_string(selector_stack)] = [encounter, []]
+							encounter += 1
 
 						depth_inc = True
 					else:
-						output[stack_string(selector_stack)].append(line)
+						output[stack_string(selector_stack)][1].append(line)
 
 	f.close()
 	return output
@@ -105,12 +110,12 @@ def write(filename, data):
 
 	f = open(filename, 'w')
 	out = ''
-	keys = list(data.keys())
-	keys.sort()
-	for selector in keys:
+	keys = sorted(data.items(), key=operator.itemgetter(1))
+	for selector, _ in keys:
 		sel = selector.replace(' &', '')
 		out += sel + '{\n'
-		for i in data[selector]:
+		for i in data[selector][1]:
+
 
 			out += '\t' + i.lstrip().rstrip() + '\n'
 		out += '}\n\n'
